@@ -1,0 +1,985 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KPI Scorecard 2025</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #eef2f7;
+    padding: 24px 16px 48px;
+    color: #1a2a3a;
+  }
+
+  .page {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ══════════════════════════════
+     BANNER
+  ══════════════════════════════ */
+  .banner {
+    background: linear-gradient(135deg, #003f5c 0%, #00618f 55%, #0081b4 100%);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 32px rgba(0,63,92,.35);
+    position: relative;
+    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .banner::before {
+    content:'';position:absolute;right:-60px;bottom:-60px;
+    width:260px;height:260px;border-radius:50%;
+    background:rgba(255,255,255,.05);pointer-events:none;
+  }
+  .banner::after {
+    content:'';position:absolute;right:80px;top:-80px;
+    width:200px;height:200px;border-radius:50%;
+    background:rgba(255,255,255,.04);pointer-events:none;
+  }
+  .banner-text h1 {
+    font-size: clamp(18px,2.8vw,28px);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+.banner-text h2 {
+    font-size: clamp(24px,2.8vw,24px);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .banner-text p {
+    font-size: 12px;
+    color: rgba(255,255,255,.7);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 5px;
+  }
+  .banner-scores { display:flex; gap:12px; flex-wrap:wrap; }
+  .score-pill {
+    background: rgba(255,255,255,.13);
+    border: 1.5px solid rgba(255,255,255,.28);
+    border-radius: 50px;
+    padding: 10px 22px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    min-width: 90px;
+  }
+  .score-pill .val {
+    font-size: clamp(20px,2.8vw,30px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+  .score-pill .lbl {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,.65);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 3px;
+  }
+  .score-pill.highlight {
+    background: rgba(255,255,255,.22);
+    border-color: rgba(255,255,255,.5);
+  }
+
+  /* ══════════════════════════════
+     SUMMARY CARDS
+  ══════════════════════════════ */
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 14px;
+  }
+  .sum-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 18px 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+    border-top: 4px solid #ccc;
+  }
+  .sum-card.financial  { border-top-color: #3b82f6; }
+  .sum-card.market     { border-top-color: #22c55e; }
+  .sum-card.internal   { border-top-color: #f59e0b; }
+  .sum-card.innovation { border-top-color: #a855f7; }
+
+  .sum-cat { font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#7a8fa6; }
+  .sum-name { font-size:13px;font-weight:700;color:#1a2a3a;margin:4px 0 10px; }
+  .sum-months { display:flex; gap:16px; }
+  .sum-month { display:flex;flex-direction:column;gap:1px; }
+  .sum-month .smv { font-size:22px;font-weight:800;color:#003f5c;line-height:1; }
+  .sum-month .sml { font-size:10px;color:#9aabb8;text-transform:uppercase;letter-spacing:.4px; }
+
+  /* ══════════════════════════════
+     TABLE CARD
+  ══════════════════════════════ */
+  .table-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 16px rgba(0,0,0,.08);
+    overflow: hidden;
+  }
+  .table-card-header {
+    background: #003f5c;
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .table-card-header h2 {
+    font-size:13px;font-weight:700;color:#fff;
+    text-transform:uppercase;letter-spacing:.8px;
+  }
+  .table-card-header span {
+    font-size:11px;color:rgba(255,255,255,.6);
+  }
+  .tbl-outer { overflow-x: auto; }
+
+  /* ══════════════════════════════
+     TABLE STYLES
+  ══════════════════════════════ */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+    min-width: 1200px;
+  }
+
+  /* Header rows */
+  thead tr.hdr-top th {
+    background: #00304a;
+    color: rgba(255,255,255,.8);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    padding: 9px 10px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,.08);
+  }
+  thead tr.hdr-top th.hl { background:#004d73; }
+
+  thead tr.hdr-sub th {
+    background: #004d73;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 8px 10px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,.08);
+    border-bottom: 2px solid rgba(255,255,255,.12);
+    white-space: nowrap;
+  }
+  thead tr.hdr-sub th.left { text-align:left; }
+
+  /* Category label cell */
+  .cat-label-cell {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    text-align: center;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    padding: 14px 8px;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .cat-label-cell.financial  { background: #1d4ed8; }
+  .cat-label-cell.market     { background: #15803d; }
+  .cat-label-cell.internal   { background: #b45309; }
+  .cat-label-cell.innovation { background: #7e22ce; }
+
+  /* Body rows */
+  tbody tr.krow {
+    border-bottom: 1px solid #eef2f7;
+    transition: background .12s;
+  }
+  tbody tr.krow:hover { background: #f4f8fc; }
+  tbody tr.krow.alt   { background: #fafcff; }
+  tbody tr.krow.alt:hover { background: #eef4fb; }
+
+  tbody tr.krow td {
+    padding: 9px 10px;
+    vertical-align: middle;
+    border-right: 1px solid #eef2f7;
+    line-height: 1.45;
+    color: #1a2a3a;
+  }
+
+  /* Subheader rows (strategy label rows) */
+  tr.strategy-row td {
+    background: #f0f6fb;
+    padding: 7px 12px;
+    font-size: 10.5px;
+    color: #3a5a70;
+    font-style: italic;
+    border-bottom: 1px solid #e2ecf5;
+    line-height: 1.5;
+  }
+
+  .td-obj  { font-size:10.5px; color:#4a6070; line-height:1.5; max-width:180px; }
+  .td-kpi  { font-weight:600; font-size:11.5px; max-width:210px; line-height:1.4; }
+  .td-kpi small { display:block; font-size:9.5px; color:#7a8fa6; font-weight:400; margin-top:2px; }
+  .td-w    { text-align:center; font-weight:700; color:#003f5c; white-space:nowrap; }
+  .td-c    { text-align:center; }
+  .td-num  { text-align:center; font-weight:600; color:#003f5c; white-space:nowrap; }
+  .td-tgt  { text-align:center; font-weight:500; color:#4a6070; white-space:nowrap; }
+
+  /* Rating scale cells */
+  .rs {
+    text-align:center;
+    font-size:10px;
+    color:#5a6a7a;
+    max-width:80px;
+    line-height:1.35;
+  }
+  .rs-n {
+    display:inline-block;
+    background:#e8f0f8;
+    color:#003f5c;
+    font-weight:700;
+    font-size:9px;
+    border-radius:4px;
+    padding:1px 5px;
+    margin-bottom:2px;
+  }
+
+  /* Rating badge */
+  .rb {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:24px;height:24px;
+    border-radius:50%;
+    font-weight:700;
+    font-size:11px;
+    margin:auto;
+  }
+  .rb.r1 { background:#fee2e2; color:#b91c1c; }
+  .rb.r2 { background:#ffedd5; color:#c2410c; }
+  .rb.r3 { background:#fef9c3; color:#a16207; }
+  .rb.r4 { background:#dbeafe; color:#1d4ed8; }
+  .rb.r5 { background:#dcfce7; color:#15803d; }
+
+  .total-cell {
+    text-align:center;
+    font-weight:700;
+    font-size:12px;
+    color:#003f5c;
+    white-space:nowrap;
+  }
+
+  /* Month column group highlights */
+  .jan-actual { background:#f0f7ff; }
+  .jan-rating { background:#e8f2fc; }
+  .jan-total  { background:#ddeef9; font-weight:700; }
+  .feb-actual { background:#f0fff5; }
+  .feb-rating { background:#e8f9ee; }
+  .feb-total  { background:#d9f5e5; font-weight:700; }
+
+  /* Grand total row */
+  tr.grand-total td {
+    background: #003f5c;
+    color: #fff;
+    font-weight:700;
+    font-size:13px;
+    text-align:center;
+    padding:13px 10px;
+    border-right:1px solid rgba(255,255,255,.1);
+  }
+  tr.grand-total td.gt-lbl {
+    text-align:left;
+    padding-left:16px;
+    font-size:12px;
+    letter-spacing:.4px;
+    background:#002d42;
+  }
+  tr.grand-total .gt-score {
+    font-size:20px;
+    font-weight:800;
+  }
+  tr.grand-total td.jan-total { background:#1a5f80; }
+  tr.grand-total td.feb-total { background:#1a5f80; }
+
+  /* ══════════════════════════════
+     
+
+  ══════════════════════════════ */
+  .legend {
+    background:#fff;
+    border-radius:12px;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    gap:24px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    flex-wrap:wrap;
+  }
+  .legend-title {
+    font-size:11px;font-weight:700;color:#5a6a7a;
+    text-transform:uppercase;letter-spacing:.6px;
+  }
+  .legend-items { display:flex;gap:14px;flex-wrap:wrap;align-items:center; }
+  .li { display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:500;color:#3a4a5a; }
+
+  /* Footer note */
+  .footnote {
+    text-align:center;
+    font-size:11px;
+    color:#8a9ab0;
+    padding-bottom:8px;
+  }
+
+  @media(max-width:900px){
+    .summary-row{ grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:500px){
+    .summary-row{ grid-template-columns:1fr; }
+    .banner{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ BANNER ══ -->
+  <div class="banner">
+    <div class="banner-text">
+      <h1>🏦 Finance Key Performance Indicators — 2026</h1>
+      <p>Finance Division &nbsp;·&nbsp; Annual KPI Scorecard &nbsp;·&nbsp; Confidential</p>
+    </div>
+    <div class="banner-scores">
+      <div class="score-pill">
+        <div class="val">3.88</div>
+        <div class="lbl">January</div>
+      </div>
+      <div class="score-pill">
+        <div class="val">3.58</div>
+        <div class="lbl">February</div>
+      </div>
+      <div class="score-pill highlight">
+        <div class="val">3.73</div>
+        <div class="lbl">Average</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SUMMARY CARDS ══ -->
+  <div class="summary-row">
+    <div class="sum-card financial">
+      <div class="sum-cat">Category 1</div>
+      <div class="sum-name">💰 Financial / Value</div>
+      <div class="sum-months">
+        <div class="sum-month"><div class="smv">1.00</div><div class="sml">Jan</div></div>
+        <div class="sum-month"><div class="smv">0.60</div><div class="sml">Feb</div></div>
+      </div>
+    </div>
+    <div class="sum-card market">
+      <div class="sum-cat">Category 2</div>
+      <div class="sum-name">🎯 Market / Customer</div>
+      <div class="sum-months">
+        <div class="sum-month"><div class="smv">0.50</div><div class="sml">Jan</div></div>
+        <div class="sum-month"><div class="smv">0.50</div><div class="sml">Feb</div></div>
+      </div>
+    </div>
+    <div class="sum-card internal">
+      <div class="sum-cat">Category 3</div>
+      <div class="sum-name">⚙️ Internal Business Process</div>
+      <div class="sum-months">
+        <div class="sum-month"><div class="smv">1.70</div><div class="sml">Jan</div></div>
+        <div class="sum-month"><div class="smv">1.90</div><div class="sml">Feb</div></div>
+      </div>
+    </div>
+    <div class="sum-card innovation">
+      <div class="sum-cat">Category 4</div>
+      <div class="sum-name">🚀 Innovation &amp; Learning</div>
+      <div class="sum-months">
+        <div class="sum-month"><div class="smv">0.58</div><div class="sml">Jan</div></div>
+        <div class="sum-month"><div class="smv">0.58</div><div class="sml">Feb</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MAIN TABLE ══ -->
+  <div class="table-card">
+    <div class="table-card-header">
+      <h2>📊 Detailed KPI Scorecard</h2>
+      <span>Total Weight: 100% &nbsp;|&nbsp; Rating Scale: 1 (Lowest) → 5 (Highest)</span>
+    </div>
+    <div class="tbl-outer">
+    <table>
+      <thead>
+        <tr class="hdr-top">
+          <th colspan="6" style="text-align:left;padding-left:14px;">KEY PERFORMANCE INDICATORS</th>
+          <th colspan="5">RATING SCALE</th>
+          <th colspan="3" class="hl">◀ JANUARY 2026 ▶</th>
+          <th colspan="3" class="hl">◀ FEBRUARY 2026 ▶</th>
+        </tr>
+        <tr class="hdr-sub">
+          <th class="left" style="min-width:70px;">Category</th>
+          <th class="left" style="min-width:170px;">Objective / Strategy</th>
+          <th class="left" style="min-width:195px;">KPI / Measurement Criteria</th>
+          <th style="min-width:55px;">Weight</th>
+          <th style="min-width:65px;">2025 Act.</th>
+          <th style="min-width:65px;">2026 Target</th>
+          <th style="min-width:80px;">① Poor</th>
+          <th style="min-width:80px;">② Needs Improvement</th>
+          <th style="min-width:80px;">③ Satisfactory</th>
+          <th style="min-width:80px;">④ Fully Satisfactory</th>
+          <th style="min-width:80px;">⑤ Outstanding</th>
+          <th style="min-width:70px;">Actual</th>
+          <th style="min-width:55px;">Rating</th>
+          <th style="min-width:55px;">Total</th>
+          <th style="min-width:70px;">Actual</th>
+          <th style="min-width:55px;">Rating</th>
+          <th style="min-width:55px;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- ════════════════════════
+             FINANCIAL / VALUE
+        ════════════════════════ -->
+
+        <!-- Row 1: Net Profit Margin -->
+        <tr class="krow">
+          <td rowspan="2" style="padding:0;width:60px;">
+            <div class="cat-label-cell financial">Financial / Value</div>
+          </td>
+          <td class="td-obj">Group Profitability — Responsible for the company's long-term financial health and growth. Establish strategies that will earn profits to achieve group profitability targets.</td>
+          <td class="td-kpi">Net Profit Margin</td>
+          <td class="td-w">10.00%</td>
+          <td class="td-num">14.00%</td>
+          <td class="td-tgt">14.00%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>11% &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 11–12%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 12–13%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 13–15%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 15%</td>
+          <td class="td-num jan-actual">16%</td>
+          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell jan-total">0.50</td>
+          <td class="td-num feb-actual">11.87%</td>
+          <td class="td-c feb-rating"><span class="rb r2">2</span></td>
+          <td class="total-cell feb-total">0.20</td>
+        </tr>
+
+        <!-- Row 2: ROE -->
+        <tr class="krow alt">
+          <td class="td-obj">Group Return on Equity / Investments — Analyze CAPEX to reduce financial risks. Monitor performance of investments vs. target to achieve target return on equity.</td>
+          <td class="td-kpi">Return on Equity (ROE)</td>
+          <td class="td-w">10.00%</td>
+          <td class="td-num">21.00%</td>
+          <td class="td-tgt">20.00%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>12% &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 12–15%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 15–18%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 18–20%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 20%</td>
+          <td class="td-num jan-actual">21.71%</td>
+          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell jan-total">0.50</td>
+          <td class="td-num feb-actual">18.82%</td>
+          <td class="td-c feb-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell feb-total">0.40</td>
+        </tr>
+
+        <!-- ════════════════════════
+             MARKET / CUSTOMER
+        ════════════════════════ -->
+
+        <!-- Row 3: Tested Internal Control -->
+        <tr class="krow">
+          <td rowspan="2" style="padding:0;width:60px;">
+            <div class="cat-label-cell market">Market / Customer</div>
+          </td>
+          <td class="td-obj">Quality of Services (Internal) — Recognize patterns in company finances, spending, revenue. Recommend solutions by initiating projects for services, systems &amp; process improvements.<br/><small style="font-size:9.5px;color:#888;">Minor finding=1 · Major=2 · Critical=3</small></td>
+          <td class="td-kpi">Tested Internal Controls</td>
+          <td class="td-w">5.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">90%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>60% &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 60–75%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 75–90%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 90–95%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 95%</td>
+          <td class="td-num jan-actual">100%</td>
+          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell jan-total">0.25</td>
+          <td class="td-num feb-actual">79.41%</td>
+          <td class="td-c feb-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell feb-total">0.25</td>
+        </tr>
+
+        <!-- Row 4: BIR Penalties -->
+        <tr class="krow alt">
+          <td class="td-obj">BIR Compliance — Ensure zero BIR penalties through timely, accurate tax filings and strict adherence to tax regulations and guidelines.</td>
+          <td class="td-kpi">BIR Penalties</td>
+          <td class="td-w">5.00%</td>
+          <td class="td-num">50%</td>
+          <td class="td-tgt">Zero (₱0)</td>
+          <td class="rs"><span class="rs-n">1</span><br/>Above ₱20K</td>
+          <td class="rs"><span class="rs-n">2</span><br/>₱10.99K–20K</td>
+          <td class="rs"><span class="rs-n">3</span><br/>₱5.99K–10K</td>
+          <td class="rs"><span class="rs-n">4</span><br/>₱1K–5K</td>
+          <td class="rs"><span class="rs-n">5</span><br/>₱ 0</td>
+          <td class="td-num jan-actual">₱ 0</td>
+          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell jan-total">0.25</td>
+          <td class="td-num feb-actual">₱ 0</td>
+          <td class="td-c feb-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell feb-total">0.25</td>
+        </tr>
+
+        <!-- ════════════════════════
+             INTERNAL BUSINESS PROCESS
+        ════════════════════════ -->
+
+        <!-- Row 5: Cash Flow Forecast Accuracy -->
+        <tr class="krow">
+          <td rowspan="6" style="padding:0;width:60px;">
+            <div class="cat-label-cell internal" style="height:100%;">Internal Business Process</div>
+          </td>
+          <td class="td-obj">Cash Flow / Treasury — Retain constant awareness of the company's financial and cash flow position. Prevent problems. Develop corporate fundraising strategy and manage relationships with partners and investors.</td>
+          <td class="td-kpi">
+            Cash Flow Forecast Accuracy
+            <small>(Act. Expenditures / Proj. Expenditures + Act. Collections / Proj. Collections) ÷ 2</small>
+          </td>
+          <td class="td-w">10.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">90%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>60% &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 60–75%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 75–80%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 80–90%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 90%</td>
+          <td class="td-num jan-actual">100%</td>
+          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell jan-total">0.50</td>
+          <td class="td-num feb-actual">90%</td>
+          <td class="td-c feb-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell feb-total">0.40</td>
+        </tr>
+
+        <!-- Row 6: Operating Cash Flow Coverage -->
+        <tr class="krow alt">
+          <td class="td-obj">Cash Flow / Treasury — Operating liquidity coverage of collections against total financial requirements.</td>
+          <td class="td-kpi">
+            Operating Cash Flow Coverage
+            <small>Collection ÷ Total Requirement</small>
+          </td>
+          <td class="td-w">10.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">1–1.2x</td>
+          <td class="rs"><span class="rs-n">1</span><br/>0.4x &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 0.4x–1x</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 0.8x–1x</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 1x–1.2x</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 1.2x</td>
+          <td class="td-num jan-actual">1.0x</td>
+                    <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.40</td>
+          <td class="td-num feb-actual">1.15x</td>
+          <td class="td-c feb-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell feb-total">0.50</td>
+        </tr>
+
+        <!-- Row 7: Resolved Audit Findings -->
+        <tr class="krow">
+          <td class="td-obj">Delivery of Financial Reports — Oversee accounting operations &amp; produce accurate reports. Improve current practices to increase efficiency. Ensure adherence to financial laws, taxation and guidelines for accurate, timely reports and compliance.</td>
+          <td class="td-kpi">Resolved Audit Findings</td>
+          <td class="td-w">8.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">95%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>below 60%</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 60–75%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 75–90%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 90–95%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 95–100%</td>
+          <td class="td-num jan-actual">57.04%</td>
+          <td class="td-c jan-rating"><span class="rb r1">1</span></td>
+          <td class="total-cell jan-total">0.08</td>
+          <td class="td-num feb-actual">57.04%</td>
+          <td class="td-c feb-rating"><span class="rb r1">1</span></td>
+          <td class="total-cell feb-total">0.08</td>
+        </tr>
+
+        <!-- Row 8: Audit Score -->
+        <tr class="krow alt">
+          <td class="td-obj">Delivery of Financial Reports — External / internal audit performance score reflecting the quality of financial reporting and compliance.</td>
+          <td class="td-kpi">Audit Score</td>
+          <td class="td-w">8.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">4</td>
+          <td class="rs"><span class="rs-n">1</span><br/>Score 1</td>
+          <td class="rs"><span class="rs-n">2</span><br/>Score 2</td>
+          <td class="rs"><span class="rs-n">3</span><br/>Score 3</td>
+          <td class="rs"><span class="rs-n">4</span><br/>Score 4</td>
+          <td class="rs"><span class="rs-n">5</span><br/>Score 5</td>
+          <td class="td-num jan-actual">4</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.32</td>
+          <td class="td-num feb-actual">4</td>
+          <td class="td-c feb-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell feb-total">0.32</td>
+        </tr>
+
+        <!-- Row 9: Cycle Time of Reports -->
+        <tr class="krow">
+          <td class="td-obj">Productivity &amp; Efficiency — Ensure productivity of finance operations across all SBU and Head Office by computing the right headcount for high productivity.</td>
+          <td class="td-kpi">
+            Cycle Time of Reports
+            <small>Report Submitted − Report Deadline</small>
+          </td>
+          <td class="td-w">10.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">0 days</td>
+          <td class="rs"><span class="rs-n">1</span><br/>more than 7 days</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 5–7 days</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 2–5 days</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 0–2 days</td>
+          <td class="rs"><span class="rs-n">5</span><br/>0 days</td>
+          <td class="td-num jan-actual">1 day</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.40</td>
+          <td class="td-num feb-actual">1 day</td>
+          <td class="td-c feb-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell feb-total">0.40</td>
+        </tr>
+
+        <!-- Row 10: Timely Report Rate -->
+        <tr class="krow alt">
+          <td class="td-obj">Productivity &amp; Efficiency — Monitor the percentage of reports submitted on time to ensure finance operations deliver accurate and timely outputs.</td>
+          <td class="td-kpi">
+            Timely Report Rate
+            <small>Timely Reports ÷ Total Reports</small>
+          </td>
+          <td class="td-w">10.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">95%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>60% &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 60–75%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 75–90%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 90–95%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 95%</td>
+          <td class="td-num jan-actual">50%</td>
+          <td class="td-c jan-rating"><span class="rb r1">1</span></td>
+          <td class="total-cell jan-total">0.10</td>
+          <td class="td-num feb-actual">70.47%</td>
+          <td class="td-c feb-rating"><span class="rb r2">2</span></td>
+          <td class="total-cell feb-total">0.20</td>
+        </tr>
+
+        <!-- ════════════════════════
+             INNOVATION & LEARNING
+        ════════════════════════ -->
+
+        <!-- Row 11: Automation Rate -->
+        <tr class="krow">
+          <td rowspan="3" style="padding:0;width:60px;">
+            <div class="cat-label-cell innovation" style="height:100%;">Innovation &amp; Learning</div>
+          </td>
+          <td class="td-obj">ERP Systems &amp; Implementation — Set up and oversee the company's finance IT system. Ensure implementation of IT systems is on-time and on-budget, including target response time for development of systems and programs requested by users.</td>
+          <td class="td-kpi">
+            Automation Rate
+            <small>Automated Processes ÷ Total Processes</small>
+          </td>
+          <td class="td-w">10.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">90%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>60% &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 60–75%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 75–80%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 80–90%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 90%</td>
+          <td class="td-num jan-actual">—</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.40</td>
+          <td class="td-num feb-actual">—</td>
+          <td class="td-c feb-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell feb-total">0.40</td>
+        </tr>
+
+        <!-- Row 12: Employee Retention Rate -->
+        <tr class="krow alt">
+          <td class="td-obj">HR Development — Set targets for and supervise all finance personnel. Plan and prepare organization structure; recruit, train, coach, and motivate staff to ensure sufficient support to achieve company objectives and retain qualified employees.</td>
+          <td class="td-kpi">Employee Retention Rate</td>
+          <td class="td-w">2.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">95%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>70% &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 70–80%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 80–90%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 90–95%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 95%</td>
+          <td class="td-num jan-actual">96.88%</td>
+          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell jan-total">0.10</td>
+          <td class="td-num feb-actual">95.16%</td>
+          <td class="td-c feb-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell feb-total">0.10</td>
+        </tr>
+
+        <!-- Row 13: Man-hour Training -->
+        <tr class="krow">
+          <td class="td-obj">HR Development — Ensure adequate training investment per finance headcount to improve competency, skills, and overall team performance.</td>
+          <td class="td-kpi">
+            Man-Hour Training Target / Headcount
+          </td>
+          <td class="td-w">2.00%</td>
+          <td class="td-num">—</td>
+          <td class="td-tgt">24 hrs</td>
+          <td class="rs"><span class="rs-n">1</span><br/>8 hrs &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 8–10 hrs</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 10–15 hrs</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 15–24 hrs</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 24 hrs</td>
+          <td class="td-num jan-actual">24 hrs</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.08</td>
+          <td class="td-num feb-actual">24 hrs</td>
+          <td class="td-c feb-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell feb-total">0.08</td>
+        </tr>
+
+        <!-- ════════════════════════
+             GRAND TOTAL
+        ════════════════════════ -->
+        <tr class="grand-total">
+          <td colspan="3" class="gt-lbl">🏁 TOTAL POINTS &nbsp;|&nbsp; 13 KPIs &nbsp;|&nbsp; 4 Categories</td>
+          <td>100%</td>
+          <td>—</td>
+          <td>—</td>
+          <td colspan="5">—</td>
+          <td class="jan-actual" style="background:#1a5f80;color:#fff;">—</td>
+          <td class="jan-rating" style="background:#1a5f80;color:#fff;">—</td>
+          <td class="jan-total" style="background:#0f7a50;color:#fff;">
+            <span class="gt-score">3.88</span>
+          </td>
+          <td class="feb-actual" style="background:#1a5f80;color:#fff;">—</td>
+          <td class="feb-rating" style="background:#1a5f80;color:#fff;">—</td>
+          <td class="feb-total" style="background:#0f7a50;color:#fff;">
+            <span class="gt-score">3.58</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div><!-- /tbl-outer -->
+  </div><!-- /table-card -->
+
+  <!-- ══ LEGEND ══ -->
+  <div class="legend">
+    <span class="legend-title">Rating Legend:</span>
+    <div class="legend-items">
+      <div class="li"><span class="rb r1" style="width:22px;height:22px;font-size:10px;">1.0-1.99</span> Poor</div>
+      <div class="li"><span class="rb r2" style="width:22px;height:22px;font-size:10px;">2.0-2.99</span> Needs improvement</div>
+      <div class="li"><span class="rb r3" style="width:22px;height:22px;font-size:10px;">3.0-3.99</span> Satisfactory</div>
+      <div class="li"><span class="rb r4" style="width:22px;height:22px;font-size:10px;">4.0-4.49</span> Fully Satisfactory</div>
+      <div class="li"><span class="rb r5" style="width:22px;height:22px;font-size:10px;">4.5-5.00</span> Outstanding</div>
+    </div>
+    <div style="margin-left:auto;font-size:11px;color:#7a8fa6;">
+      <strong style="color:#003f5c;">Jan Score: 3.88</strong> &nbsp;·&nbsp;
+      <strong style="color:#003f5c;">Feb Score: 3.58</strong> &nbsp;·&nbsp;
+      <strong style="color:#003f5c;">Average: 3.73 / 5.00</strong>
+    </div>
+  </div>
+
+
+
+
+  <!-- ══ ACTION PLAN══ -->
+<div class="banner">
+    <div class="banner-text">
+      <h2>Action Plan</h2>
+      <ul style="
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+">
+  <li style="
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.6;
+  ">
+    <span style="
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: #003f5c;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      margin-top: 1px;
+    ">1</span>
+    Protect margins through the use of <strong>HEATMAP</strong> and communication with GM / Operations.
+  </li>
+
+  <li style="
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.6;
+  ">
+    <span style="
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: #003f5c;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      margin-top: 1px;
+    ">2</span>
+    Enforce <strong>weekly closure meetings</strong> for unresolved audit findings.
+  </li>
+
+  <li style="
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.6;
+  ">
+    <span style="
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: #003f5c;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      margin-top: 1px;
+    ">3</span>
+    Assign <strong>explicit owners and escalation points</strong> for report deadlines.
+  </li>
+
+  <li style="
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.6;
+  ">
+    <span style="
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: #003f5c;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      margin-top: 1px;
+    ">4</span>
+    Accelerate <strong>automation</strong> to reduce manual reporting delays.
+  </li>
+
+  <li style="
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.6;
+  ">
+    <span style="
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: #003f5c;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      margin-top: 1px;
+    ">5</span>
+    Maintain <strong>retention and training momentum</strong> across the finance team.
+  </li>
+
+  <li style="
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.6;
+  ">
+    <span style="
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: #003f5c;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      margin-top: 1px;
+    ">6</span>
+    Link <strong>KPI accountability</strong> directly to leadership review cadence.
+  </li>
+</ul>
+
+    </div>
+    
+    </div>
+  </div>
+ 
+  
+ 
+ <!-- ══ FOOTNOTE ══ -->
+  <div class="footnote">
+    GMF KPI Scorecard 2026 &nbsp;·&nbsp; Finance Division &nbsp;·&nbsp; For Internal Use Only &nbsp;·&nbsp; Data as of February 2026
+  </div>
+
+
+</div><!-- /page -->
+</body>
+</html>
+
