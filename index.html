@@ -13,7 +13,7 @@
   body {
     font-family: 'Inter', sans-serif;
     background: #eef2f7;
-    padding: 24px 16px 48px;
+    padding: 0px 0px 0px;
     color: #1a2a3a;
   }
 
@@ -378,6 +378,10 @@
         <div class="val">3.58</div>
         <div class="lbl">February</div>
       </div>
+      <div class="score-pill">
+        <div class="val">3.50</div>
+        <div class="lbl">March</div>
+      </div>
       <div class="score-pill highlight">
         <div class="val">3.73</div>
         <div class="lbl">Average</div>
@@ -393,6 +397,7 @@
       <div class="sum-months">
         <div class="sum-month"><div class="smv">1.00</div><div class="sml">Jan</div></div>
         <div class="sum-month"><div class="smv">0.60</div><div class="sml">Feb</div></div>
+        <div class="sum-month"><div class="smv">1.60</div><div class="sml">Mar</div></div>
       </div>
     </div>
     <div class="sum-card market">
@@ -401,6 +406,7 @@
       <div class="sum-months">
         <div class="sum-month"><div class="smv">0.50</div><div class="sml">Jan</div></div>
         <div class="sum-month"><div class="smv">0.50</div><div class="sml">Feb</div></div>
+        <div class="sum-month"><div class="smv">0.60</div><div class="sml">Mar</div></div>
       </div>
     </div>
     <div class="sum-card internal">
@@ -409,6 +415,7 @@
       <div class="sum-months">
         <div class="sum-month"><div class="smv">1.70</div><div class="sml">Jan</div></div>
         <div class="sum-month"><div class="smv">1.90</div><div class="sml">Feb</div></div>
+        <div class="sum-month"><div class="smv">1.60</div><div class="sml">Mar</div></div>
       </div>
     </div>
     <div class="sum-card innovation">
@@ -417,6 +424,7 @@
       <div class="sum-months">
         <div class="sum-month"><div class="smv">0.58</div><div class="sml">Jan</div></div>
         <div class="sum-month"><div class="smv">0.58</div><div class="sml">Feb</div></div>
+        <div class="sum-month"><div class="smv">0.68</div><div class="sml">Mar</div></div>
       </div>
     </div>
   </div>
@@ -435,6 +443,7 @@
           <th colspan="5">RATING SCALE</th>
           <th colspan="3" class="hl">◀ JANUARY 2026 ▶</th>
           <th colspan="3" class="hl">◀ FEBRUARY 2026 ▶</th>
+          <th colspan="3" class="hl">◀ March 2026 ▶</th>
         </tr>
         <tr class="hdr-sub">
           <th class="left" style="min-width:70px;">Category</th>
@@ -448,6 +457,9 @@
           <th style="min-width:80px;">③ Satisfactory</th>
           <th style="min-width:80px;">④ Fully Satisfactory</th>
           <th style="min-width:80px;">⑤ Outstanding</th>
+          <th style="min-width:70px;">Actual</th>
+          <th style="min-width:55px;">Rating</th>
+          <th style="min-width:55px;">Total</th>
           <th style="min-width:70px;">Actual</th>
           <th style="min-width:55px;">Rating</th>
           <th style="min-width:55px;">Total</th>
@@ -483,6 +495,9 @@
           <td class="td-num feb-actual">11.87%</td>
           <td class="td-c feb-rating"><span class="rb r2">2</span></td>
           <td class="total-cell feb-total">0.20</td>
+          <td class="td-num jan-actual">26%</td>
+          <td class="td-c jan-rating"><span class="rb r3">3</span></td>
+          <td class="total-cell jan-total">0.50</td>
         </tr>
 
         <!-- Row 2: ROE -->
@@ -503,6 +518,9 @@
           <td class="td-num feb-actual">18.82%</td>
           <td class="td-c feb-rating"><span class="rb r4">4</span></td>
           <td class="total-cell feb-total">0.40</td>
+          <td class="td-num jan-actual">21.71%</td>
+          <td class="td-c jan-rating"><span class="rb r3">3</span></td>
+          <td class="total-cell jan-total">0.50</td>
         </tr>
 
         <!-- ════════════════════════
@@ -516,7 +534,7 @@
           </td>
           <td class="td-obj">Quality of Services (Internal) — Recognize patterns in company finances, spending, revenue. Recommend solutions by initiating projects for services, systems &amp; process improvements.<br/><small style="font-size:9.5px;color:#888;">Minor finding=1 · Major=2 · Critical=3</small></td>
           <td class="td-kpi">Tested Internal Controls</td>
-          <td class="td-w">5.00%</td>
+          <td class="td-w">8.00%</td>
           <td class="td-num">—</td>
           <td class="td-tgt">90%</td>
           <td class="rs"><span class="rs-n">1</span><br/>60% &amp; below</td>
@@ -530,41 +548,52 @@
           <td class="td-num feb-actual">79.41%</td>
           <td class="td-c feb-rating"><span class="rb r5">5</span></td>
           <td class="total-cell feb-total">0.25</td>
+          <td class="td-num jan-actual">100%</td>
+          <td class="td-c jan-rating"><span class="rb r2">2</span></td>
+          <td class="total-cell jan-total">0.25</td>
         </tr>
 
-        <!-- Row 4: BIR Penalties -->
+        <!-- Heatmap Monitoring -->
         <tr class="krow alt">
-          <td class="td-obj">BIR Compliance — Ensure zero BIR penalties through timely, accurate tax filings and strict adherence to tax regulations and guidelines.</td>
-          <td class="td-kpi">BIR Penalties</td>
-          <td class="td-w">5.00%</td>
-          <td class="td-num">50%</td>
-          <td class="td-tgt">Zero (₱0)</td>
-          <td class="rs"><span class="rs-n">1</span><br/>Above ₱20K</td>
-          <td class="rs"><span class="rs-n">2</span><br/>₱10.99K–20K</td>
-          <td class="rs"><span class="rs-n">3</span><br/>₱5.99K–10K</td>
-          <td class="rs"><span class="rs-n">4</span><br/>₱1K–5K</td>
-          <td class="rs"><span class="rs-n">5</span><br/>₱ 0</td>
-          <td class="td-num jan-actual">₱ 0</td>
-          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="td-obj">Monitor Key Peformance Index using heatmap and recommend financial strategies to improve performance</td>
+          <td class="td-kpi">Performance Improvement Index (HeatMap)
+            <small>Improved KPI / Weak KPI</small>
+            </td>
+          <td class="td-w">8.00%</td>
+          <td class="td-num">-</td>
+          <td class="td-tgt">90%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>below 75%</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 75% to 80%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 80% to 90%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 90% to 95%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 95% to 100%</td>
+          <td class="td-num jan-actual">90%</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
           <td class="total-cell jan-total">0.25</td>
-          <td class="td-num feb-actual">₱ 0</td>
-          <td class="td-c feb-rating"><span class="rb r5">5</span></td>
+          <td class="td-num feb-actual">90%</td>
+          <td class="td-c feb-rating"><span class="rb r4">4</span></td>
           <td class="total-cell feb-total">0.25</td>
+          <td class="td-num jan-actual">90%</td>
+          <td class="td-c jan-rating"><span class="rb r5">4</span></td>
+          <td class="total-cell jan-total">0.25</td>
         </tr>
 
         <!-- ════════════════════════
              INTERNAL BUSINESS PROCESS
         ════════════════════════ -->
 
-        <!-- Row 5: Cash Flow Forecast Accuracy -->
+        <!-- Row 5: Cash Conversion Cycle -->
         <tr class="krow">
           <td rowspan="6" style="padding:0;width:60px;">
             <div class="cat-label-cell internal" style="height:100%;">Internal Business Process</div>
           </td>
-          <td class="td-obj">Cash Flow / Treasury — Retain constant awareness of the company's financial and cash flow position. Prevent problems. Develop corporate fundraising strategy and manage relationships with partners and investors.</td>
+          <td rowspan="2" 
+            <div class="td-obj">Cash Flow / Treasury — Retain constant awareness of the company's financial and cash flow position. Prevent problems. Develop corporate fundraising strategy and manage relationships with partners and investors.
+              </div>
+            </td>
           <td class="td-kpi">
-            Cash Flow Forecast Accuracy
-            <small>(Act. Expenditures / Proj. Expenditures + Act. Collections / Proj. Collections) ÷ 2</small>
+            Cash Conversion Cycle
+            <small>DSO+DIO-DPO</small>
           </td>
           <td class="td-w">10.00%</td>
           <td class="td-num">—</td>
@@ -580,14 +609,18 @@
           <td class="td-num feb-actual">90%</td>
           <td class="td-c feb-rating"><span class="rb r4">4</span></td>
           <td class="total-cell feb-total">0.40</td>
+          <td class="td-num jan-actual">100%</td>
+          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell jan-total">0.50</td>
         </tr>
 
-        <!-- Row 6: Operating Cash Flow Coverage -->
+        <!-- Row 6: Value Spread -->
         <tr class="krow alt">
-          <td class="td-obj">Cash Flow / Treasury — Operating liquidity coverage of collections against total financial requirements.</td>
+          
           <td class="td-kpi">
-            Operating Cash Flow Coverage
-            <small>Collection ÷ Total Requirement</small>
+            Value Spread= ROCE - WACOF
+            <small>ROCE = NI / (Equity+Loan)</small>
+            <small>WACOF = Int Exp / Loan</small>
           </td>
           <td class="td-w">10.00%</td>
           <td class="td-num">—</td>
@@ -598,17 +631,21 @@
           <td class="rs"><span class="rs-n">4</span><br/>above 1x–1.2x</td>
           <td class="rs"><span class="rs-n">5</span><br/>above 1.2x</td>
           <td class="td-num jan-actual">1.0x</td>
-                    <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
           <td class="total-cell jan-total">0.40</td>
           <td class="td-num feb-actual">1.15x</td>
           <td class="td-c feb-rating"><span class="rb r5">5</span></td>
           <td class="total-cell feb-total">0.50</td>
+          <td class="td-num jan-actual">1.0x</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.40</td>
         </tr>
 
         <!-- Row 7: Resolved Audit Findings -->
         <tr class="krow">
-          <td class="td-obj">Delivery of Financial Reports — Oversee accounting operations &amp; produce accurate reports. Improve current practices to increase efficiency. Ensure adherence to financial laws, taxation and guidelines for accurate, timely reports and compliance.</td>
-          <td class="td-kpi">Resolved Audit Findings</td>
+          <td rowspan="2" padding="0px" class="td-obj">Delivery of Financial Reports — Oversee accounting operations &amp; produce accurate reports. Improve current practices to increase efficiency. Ensure adherence to financial laws, taxation and guidelines for accurate, timely reports and compliance.
+            </td>
+          <td padding="0px" class="td-kpi">Resolved Audit Findings</td>
           <td class="td-w">8.00%</td>
           <td class="td-num">—</td>
           <td class="td-tgt">95%</td>
@@ -623,12 +660,16 @@
           <td class="td-num feb-actual">57.04%</td>
           <td class="td-c feb-rating"><span class="rb r1">1</span></td>
           <td class="total-cell feb-total">0.08</td>
+          <td class="td-num jan-actual">57.04%</td>
+          <td class="td-c jan-rating"><span class="rb r1">1</span></td>
+          <td class="total-cell jan-total">0.08</td>
         </tr>
-
-        <!-- Row 8: Audit Score -->
-        <tr class="krow alt">
-          <td class="td-obj">Delivery of Financial Reports — External / internal audit performance score reflecting the quality of financial reporting and compliance.</td>
-          <td class="td-kpi">Audit Score</td>
+        <!-- Row 8: Average Delay of Report -->
+        
+          <td class="td-kpi">
+            Average Delay of Reports
+            <small>Date Submitted - Deadline</small>
+            </td>  
           <td class="td-w">8.00%</td>
           <td class="td-num">—</td>
           <td class="td-tgt">4</td>
@@ -643,39 +684,44 @@
           <td class="td-num feb-actual">4</td>
           <td class="td-c feb-rating"><span class="rb r4">4</span></td>
           <td class="total-cell feb-total">0.32</td>
+          <td class="td-num jan-actual">4</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.32</td>
         </tr>
 
-        <!-- Row 9: Cycle Time of Reports -->
+        <!-- Row 9: Accounting Project for COA Improvement -->
         <tr class="krow">
-          <td class="td-obj">Productivity &amp; Efficiency — Ensure productivity of finance operations across all SBU and Head Office by computing the right headcount for high productivity.</td>
+          <td rowspan="2" class="td-obj">Productivity &amp; Efficiency — Ensure productivity of finance operations across all SBU and Head Office by computing the right headcount for high productivity.</td>
           <td class="td-kpi">
-            Cycle Time of Reports
-            <small>Report Submitted − Report Deadline</small>
+            Accomplishment for COA Improvement
+            <small>Implemented/ COA Desired</small>
           </td>
-          <td class="td-w">10.00%</td>
+          <td class="td-w">8.00%</td>
           <td class="td-num">—</td>
-          <td class="td-tgt">0 days</td>
-          <td class="rs"><span class="rs-n">1</span><br/>more than 7 days</td>
-          <td class="rs"><span class="rs-n">2</span><br/>above 5–7 days</td>
-          <td class="rs"><span class="rs-n">3</span><br/>above 2–5 days</td>
-          <td class="rs"><span class="rs-n">4</span><br/>above 0–2 days</td>
-          <td class="rs"><span class="rs-n">5</span><br/>0 days</td>
+          <td class="td-tgt">95%</td>
+          <td class="rs"><span class="rs-n">1</span><br/>60% &amp; below</td>
+          <td class="rs"><span class="rs-n">2</span><br/>above 60–75%</td>
+          <td class="rs"><span class="rs-n">3</span><br/>above 75–90%</td>
+          <td class="rs"><span class="rs-n">4</span><br/>above 90–95%</td>
+          <td class="rs"><span class="rs-n">5</span><br/>above 95%</td>
           <td class="td-num jan-actual">1 day</td>
           <td class="td-c jan-rating"><span class="rb r4">4</span></td>
           <td class="total-cell jan-total">0.40</td>
           <td class="td-num feb-actual">1 day</td>
           <td class="td-c feb-rating"><span class="rb r4">4</span></td>
           <td class="total-cell feb-total">0.40</td>
+          <td class="td-num jan-actual">1 day</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.40</td>
         </tr>
 
-        <!-- Row 10: Timely Report Rate -->
+        <!-- Row 10: Accounting Standardization -->
         <tr class="krow alt">
-          <td class="td-obj">Productivity &amp; Efficiency — Monitor the percentage of reports submitted on time to ensure finance operations deliver accurate and timely outputs.</td>
           <td class="td-kpi">
-            Timely Report Rate
-            <small>Timely Reports ÷ Total Reports</small>
+            Accounting Operation Standardization
+            <small>Oriented & Reviewed ÷ Total Manual</small>
           </td>
-          <td class="td-w">10.00%</td>
+          <td class="td-w">8.00%</td>
           <td class="td-num">—</td>
           <td class="td-tgt">95%</td>
           <td class="rs"><span class="rs-n">1</span><br/>60% &amp; below</td>
@@ -689,6 +735,9 @@
           <td class="td-num feb-actual">70.47%</td>
           <td class="td-c feb-rating"><span class="rb r2">2</span></td>
           <td class="total-cell feb-total">0.20</td>
+          <td class="td-num jan-actual">50%</td>
+          <td class="td-c jan-rating"><span class="rb r1">1</span></td>
+          <td class="total-cell jan-total">0.10</td>
         </tr>
 
         <!-- ════════════════════════
@@ -705,7 +754,7 @@
             Automation Rate
             <small>Automated Processes ÷ Total Processes</small>
           </td>
-          <td class="td-w">10.00%</td>
+          <td class="td-w">8.00%</td>
           <td class="td-num">—</td>
           <td class="td-tgt">90%</td>
           <td class="rs"><span class="rs-n">1</span><br/>60% &amp; below</td>
@@ -719,6 +768,9 @@
           <td class="td-num feb-actual">—</td>
           <td class="td-c feb-rating"><span class="rb r4">4</span></td>
           <td class="total-cell feb-total">0.40</td>
+          <td class="td-num jan-actual">—</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.40</td>
         </tr>
 
         <!-- Row 12: Employee Retention Rate -->
@@ -739,6 +791,9 @@
           <td class="td-num feb-actual">95.16%</td>
           <td class="td-c feb-rating"><span class="rb r5">5</span></td>
           <td class="total-cell feb-total">0.10</td>
+          <td class="td-num jan-actual">96.88%</td>
+          <td class="td-c jan-rating"><span class="rb r5">5</span></td>
+          <td class="total-cell jan-total">0.10</td>
         </tr>
 
         <!-- Row 13: Man-hour Training -->
@@ -761,6 +816,10 @@
           <td class="td-num feb-actual">24 hrs</td>
           <td class="td-c feb-rating"><span class="rb r4">4</span></td>
           <td class="total-cell feb-total">0.08</td>
+          <td class="td-num jan-actual">24 hrs</td>
+          <td class="td-c jan-rating"><span class="rb r4">4</span></td>
+          <td class="total-cell jan-total">0.08</td>
+          
         </tr>
 
         <!-- ════════════════════════
@@ -782,6 +841,11 @@
           <td class="feb-total" style="background:#0f7a50;color:#fff;">
             <span class="gt-score">3.58</span>
           </td>
+           <td class="jan-actual" style="background:#1a5f80;color:#fff;">—</td>
+          <td class="jan-rating" style="background:#1a5f80;color:#fff;">—</td>
+          <td class="jan-total" style="background:#0f7a50;color:#fff;">
+            <span class="gt-score">3.88</span>
+          </td>
         </tr>
 
       </tbody>
@@ -802,6 +866,7 @@
     <div style="margin-left:auto;font-size:11px;color:#7a8fa6;">
       <strong style="color:#003f5c;">Jan Score: 3.88</strong> &nbsp;·&nbsp;
       <strong style="color:#003f5c;">Feb Score: 3.58</strong> &nbsp;·&nbsp;
+      <strong style="color:#003f5c;">Mar Score: 3.58</strong> &nbsp;·&nbsp;
       <strong style="color:#003f5c;">Average: 3.73 / 5.00</strong>
     </div>
   </div>
